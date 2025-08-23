@@ -11,7 +11,24 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 
+#include "hashmap.h"
 #include "utils.h"
+
+#include <stdbool.h>
+
+typedef struct
+{
+    size_t size;
+    char *name;
+    char *content;
+    MimeType mime_type;
+} File;
+
+typedef struct
+{
+    Hashmap *map;
+    File *not_found;
+} Router;
 
 typedef struct
 {
@@ -24,27 +41,29 @@ typedef struct
     int port;
     int socket;
     int backlog;
+    Router *router;
 } Server;
 
 typedef struct
 {
-    size_t size;
-    char *content;
-} File;
+    Hashmap *map;
+} Headers;
 
 typedef struct
 {
     Status status;
     char *version;
-    char *headers;
+    Headers *headers;
     File *body;
+    char *response_header;
+    size_t response_header_size;
 } HttpResponse;
 
 typedef struct
 {
-    Action action;
+    Method method;
     char *version;
     char *path;
-    char *headers;
+    Headers *headers;
     char *body;
 } HttpRequest;

@@ -7,7 +7,7 @@ Client *init_client(Server *server)
 
     int client_socket = accept(server->socket, (sockaddr *)&client_addr, &client_len);
 
-    Client *client = (Client *)malloc(sizeof(Client));
+    Client *client = malloc(sizeof(Client));
     if (!client)
         panic("Allocation for 'struct Client' failed");
 

@@ -10,6 +10,17 @@
         "in.h": "c",
         "http.h": "c",
         "socket.h": "c",
-        "inet.h": "c"
+        "inet.h": "c",
+        "__hash_table": "c",
+        "__node_handle": "c",
+        "deque": "c",
+        "format": "c",
+        "unordered_map": "c",
+        "version": "c",
+        "hashmap.h": "c",
+        "router.h": "c",
+        "headers.h": "c",
+        "server.h": "c",
+        "io.h": "c"
     }
 }

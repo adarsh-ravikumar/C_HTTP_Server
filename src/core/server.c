@@ -17,25 +17,28 @@ Server *init_server(int port, int backlog)
     if (bind_status == -1)
         panic("Failed to bind socket at port %d", port);
 
-    Server *server = (Server *)malloc(sizeof(Server));
+    Server *server = malloc(sizeof(Server));
     if (!server)
         panic("Allocation for 'struct Server' failed");
     
+    Router *router = init_router();
+
     server->port = port;
     server->socket = sock;
     server->backlog = backlog;
+    server->router = router;
 
     return server;
 }
 
-void serve(Server *server, void (*handle_client)(Client *))
+void serve(Server *server, void (*handle_client)(Router *, Client *))
 {
     listen(server->socket, server->backlog);
 
     while (1)
     {
         Client *client = init_client(server);
-        handle_client(client);
+        handle_client(server->router, client);
         close_client(client);
     }
 }

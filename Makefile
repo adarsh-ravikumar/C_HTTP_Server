@@ -2,7 +2,7 @@ CC = gcc
 CFLAGS = -Wall -Wextra -std=c99
 TARGET = build/http_server
 
-SRC = $(wildcard src/*.c)
+SRC = $(wildcard src/*.c src/**/*.c)
 OBJ = $(SRC:.c=.o)
 
 all: $(TARGET)
