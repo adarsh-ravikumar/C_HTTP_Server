@@ -83,9 +83,14 @@ void free_hashmap(Hashmap *map, void (*free_value)(void *))
             HashmapEntry *tmp = curr;
             curr = curr->next;
 
+            printf("Freeing key: %s\n", tmp->key);
             free(tmp->key);
-            if (free_value)
-                free_value(tmp->value);
+
+            if (free_value){
+                printf("Freeing value\n");
+                free_value(tmp->value);}
+
+            printf("Freeing tmp\n");
             free(tmp);
         }
     }

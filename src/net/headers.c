@@ -40,7 +40,7 @@ char *build_headers(Headers *headers)
     for (size_t i = 0; i < HEADER_COUNT; i++)
     {
         HashmapEntry *entry = headers->map->buckets[i];
-        if (!entry) break;
+        if (!entry) continue;
 
         while (entry != NULL)
         {
